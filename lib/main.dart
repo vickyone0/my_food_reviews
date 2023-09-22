@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_food_reviews/helper/theme.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,8 +10,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: Themes.lightTheme(),
+      darkTheme: Themes.darkTheme(),
+      themeMode: ThemeMode.system,
+      home: const Scaffold(
         body: Center(
           child: Text('Hello World!'),
         ),
