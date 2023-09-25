@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ReviewMapLocation extends StatefulWidget {
-const ReviewMapLocation({ super.key });
+class ReviewMapLocations extends StatefulWidget {
+const ReviewMapLocations({ super.key });
 
-static const String route = "/review_Map_Location";
+static const String route = "/review_Map_Locations";
   
 @override
-State<ReviewMapLocation> createState() => _ReviewMapLocationState();
+State<ReviewMapLocations> createState() => _ReviewMapLocationState();
   }
   
-class _ReviewMapLocationState extends State<ReviewMapLocation> {
+class _ReviewMapLocationState extends State<ReviewMapLocations> {
 @override
 void initState() {
 super.initState();
