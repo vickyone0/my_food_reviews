@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_food_reviews/helper/theme.dart';
+import 'package:my_food_reviews/pages/home.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,11 +16,8 @@ class MainApp extends StatelessWidget {
       theme: Themes.lightTheme(),
       darkTheme: Themes.darkTheme(),
       themeMode: ThemeMode.system,
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      home: const Home(),
+      
     );
   }
 }
