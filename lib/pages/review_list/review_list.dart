@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../helper/clippers.dart';
+
 class ReviewList extends StatefulWidget {
 const ReviewList({ super.key });
 
@@ -10,18 +12,31 @@ State<ReviewList> createState() => _ReviewListState();
   }
   
 class _ReviewListState extends State<ReviewList> {
-@override
-void initState() {
-super.initState();
-}
-  
-@override
-void dispose() {
- super.dispose();
-}
+
   
 @override
 Widget build(BuildContext context) {
-return Container(color: const Color(0xFFFFE306));
+return  Scaffold(
+      appBar: AppBar(
+        title: const Text('Reviews'),
+        backgroundColor: Colors.transparent,
+        elevation: 2.0,
+        flexibleSpace: ClipPath(
+          clipper: OvalClipperUpper(),
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondaryContainer,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            )),
+          ),
+        ),
+      ),
+      extendBodyBehindAppBar: true,
+);
 }
   }
