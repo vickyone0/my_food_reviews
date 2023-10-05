@@ -1,30 +1,75 @@
-
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class ReviewEntryPhotoZoom extends StatefulWidget {
-const ReviewEntryPhotoZoom({ super.key });
-  
-  
-static const String route = '/review_entry_photo_zoom';
+import '../../helper/arguments.dart';
+import '../../models/review_model.dart';
 
-@override
-State<ReviewEntryPhotoZoom> createState() => _WidgetNameState();
+class ReviewEntryPhotoZoom extends StatelessWidget {
+  const ReviewEntryPhotoZoom({super.key});
+
+  static const String route = '/review_entry_photo_zoom';
+
+  @override
+  Widget build(BuildContext context) {
+    final ReviewEntryPhotoArguments reviewEntryPhotoArguments =
+        ModalRoute.of(context)?.settings.arguments as ReviewEntryPhotoArguments;
+    final ReviewModel reviewModel = reviewEntryPhotoArguments.reviewModel;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(reviewModel.title),
+        backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.4),
+      ),
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          InteractiveViewer(
+            child: Hero(
+              tag: '${reviewModel.reviewDate}',
+              // child: Image.network(
+              //   reviewModel.photo,
+              //   loadingBuilder: (
+              //     BuildContext context,
+              //     Widget image,
+              //     ImageChunkEvent? loadingProgress,
+              //   ) {
+              //     if (loadingProgress == null) return image;
+              //     return Center(
+              //       child: CircularProgressIndicator(
+              //         value: loadingProgress.expectedTotalBytes != null
+              //             ? loadingProgress.cumulativeBytesLoaded /
+              //                 loadingProgress.expectedTotalBytes!
+              //             : null,
+              //       ),
+              //     );
+              //   },
+              // ),
+              // Alternate way to load an image and cache it
+              child: CachedNetworkImage(
+                imageUrl: reviewModel.photo,
+                fit: BoxFit.fitWidth,
+                progressIndicatorBuilder: (
+                  BuildContext context,
+                  String url,
+                  DownloadProgress downloadProgress,
+                ) =>
+                    Center(
+                  child: CircularProgressIndicator(
+                    value: downloadProgress.progress,
+                  ),
+                ),
+                errorWidget: (
+                  BuildContext context,
+                  String url,
+                  dynamic error,
+                ) =>
+                    const Icon(Icons.error),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
-  
-class _WidgetNameState extends State<ReviewEntryPhotoZoom> {
-@override
-void initState() {
-super.initState();
 }
-  
-@override
-void dispose() {
- super.dispose();
-}
-  
-@override
-Widget build(BuildContext context) {
-return Container(color: const Color(0xFFFFE306));
-}
-  }
